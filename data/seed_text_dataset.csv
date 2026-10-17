@@ -1,0 +1,101 @@
+text,label,lang
+I slept well and work was fine today,neutral,en
+"Had tea with friends after my shift, feeling good",neutral,en
+Work is busy but I am managing okay,neutral,en
+I am looking forward to meeting my family this weekend,neutral,en
+"Today was a normal day, nothing special",neutral,en
+I finished my deliveries early and rested,neutral,en
+Feeling calm and healthy these days,neutral,en
+My salary came on time and I feel relaxed,neutral,en
+I enjoyed a short walk this morning,neutral,en
+"Everything is okay, just a little tired from the heat",neutral,en
+The kids did well in school and I am happy,neutral,en
+I talked to my brother and it felt nice,neutral,en
+No big worries this week,neutral,en
+"I am fine, thank you for asking",neutral,en
+aaj kaam achha raha aur main theek hoon,neutral,hinglish
+"ghar pe sab theek hai, mann halka hai",neutral,hinglish
+thoda thaka hoon par sab normal hai,neutral,hinglish
+"aaj dosto ke saath chai pi, maza aaya",neutral,hinglish
+is hafte koi tension nahi hai,neutral,hinglish
+neend achhi aayi aur din badhiya tha,neutral,hinglish
+"salary time pe aa gayi, sukoon hai",neutral,hinglish
+main khush hoon aur kaam bhi theek chal raha hai,neutral,hinglish
+sab kuch normal chal raha hai,neutral,hinglish
+parivaar se baat karke achha laga,neutral,hinglish
+आज काम अच्छा रहा और मैं ठीक हूँ,neutral,hi
+"घर पर सब ठीक है, मन हल्का है",neutral,hi
+थोड़ी थकान है पर सब सामान्य है,neutral,hi
+"आज दोस्तों के साथ चाय पी, अच्छा लगा",neutral,hi
+इस हफ्ते कोई चिंता नहीं है,neutral,hi
+नींद अच्छी आई और दिन बढ़िया रहा,neutral,hi
+"तनख्वाह समय पर आ गई, सुकून है",neutral,hi
+मैं खुश हूँ और काम ठीक चल रहा है,neutral,hi
+सब कुछ सामान्य चल रहा है,neutral,hi
+परिवार से बात करके अच्छा लगा,neutral,hi
+I cannot sleep at night because I keep worrying about money,distress,en
+I feel very low and tired all the time,distress,en
+I am always anxious and my heart races before every shift,distress,en
+Nothing makes me happy anymore,distress,en
+I feel lonely and nobody understands me,distress,en
+I am so stressed that I cannot focus on work,distress,en
+I keep crying for no reason lately,distress,en
+I feel hopeless about my debts,distress,en
+I am exhausted and have lost interest in everything,distress,en
+I feel on edge all day and cannot relax,distress,en
+I have been feeling sad for weeks,distress,en
+My mind is full of tension and I cannot eat properly,distress,en
+I get panic when I think about tomorrow,distress,en
+I feel worn out and sad most days,distress,en
+"mujhe raat ko neend nahi aati, bahut tension hai",distress,hinglish
+mann bahut udaas rehta hai aur thakaan rehti hai,distress,hinglish
+har waqt ghabrahat rehti hai,distress,hinglish
+kisi cheez mein mann nahi lagta,distress,hinglish
+main bahut akela mehsoos karta hoon,distress,hinglish
+paise ki chinta se kaam mein dhyan nahi lagta,distress,hinglish
+bina wajah rona aata hai,distress,hinglish
+karz ki wajah se bahut pareshan hoon,distress,hinglish
+bhookh nahi lagti aur bechaini rehti hai,distress,hinglish
+dil bahut bhaari hai kai hafton se,distress,hinglish
+"रात को नींद नहीं आती, बहुत तनाव है",distress,hi
+मन बहुत उदास रहता है और थकान रहती है,distress,hi
+हर समय घबराहट रहती है,distress,hi
+किसी चीज़ में मन नहीं लगता,distress,hi
+मैं बहुत अकेला महसूस करता हूँ,distress,hi
+पैसों की चिंता से काम में ध्यान नहीं लगता,distress,hi
+बिना वजह रोना आता है,distress,hi
+कर्ज़ की वजह से बहुत परेशान हूँ,distress,hi
+भूख नहीं लगती और बेचैनी रहती है,distress,hi
+कई हफ्तों से दिल बहुत भारी है,distress,hi
+I want to die,crisis,en
+I do not want to live anymore,crisis,en
+I am thinking about ending my life,crisis,en
+everyone would be better off without me,crisis,en
+I want to hurt myself,crisis,en
+I wish I could just disappear forever,crisis,en
+I have no reason to live,crisis,en
+I am going to end it all,crisis,en
+"I cannot go on, I want to kill myself",crisis,en
+life is not worth living for me,crisis,en
+I think about suicide every day,crisis,en
+I feel like giving up on life completely,crisis,en
+main marna chahta hoon,crisis,hinglish
+mujhe jeena nahi hai ab,crisis,hinglish
+main apni jaan dena chahta hoon,crisis,hinglish
+"sabko meri wajah se pareshani hai, main mar jaun to behtar",crisis,hinglish
+main khud ko khatam kar lunga,crisis,hinglish
+ab jeene ka koi matlab nahi,crisis,hinglish
+mujhe khud ko nuksan pahunchana hai,crisis,hinglish
+"main zindagi se haar gaya hoon, jeena nahi chahta",crisis,hinglish
+suicide ke khayal aate rehte hain,crisis,hinglish
+main sab kuch khatam karna chahti hoon,crisis,hinglish
+मैं मरना चाहता हूँ,crisis,hi
+मुझे अब जीना नहीं है,crisis,hi
+मैं अपनी जान देना चाहता हूँ,crisis,hi
+मेरे बिना सब बेहतर होंगे,crisis,hi
+मैं खुद को खत्म कर लूँगा,crisis,hi
+अब जीने का कोई मतलब नहीं,crisis,hi
+मैं खुद को नुकसान पहुँचाना चाहता हूँ,crisis,hi
+"मैं ज़िंदगी से हार गया हूँ, जीना नहीं चाहता",crisis,hi
+आत्महत्या के ख्याल आते रहते हैं,crisis,hi
+मैं सब कुछ खत्म करना चाहती हूँ,crisis,hi

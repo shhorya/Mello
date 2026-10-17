@@ -1,0 +1,13 @@
+{
+  "options": {
+    "en": ["Not at all", "Several days", "More than half the days", "Nearly every day"],
+    "hi": ["बिल्कुल नहीं", "कुछ दिन", "आधे से ज़्यादा दिन", "लगभग रोज़"]
+  },
+  "questions": [
+    {"id": "q1", "domain": "mood", "en": "Over the last 2 weeks, how often have you had little interest or joy in doing things?", "hi": "पिछले 2 हफ्तों में कितनी बार किसी काम में मन नहीं लगा या खुशी नहीं मिली?"},
+    {"id": "q2", "domain": "mood", "en": "How often have you felt down, low or hopeless?", "hi": "कितनी बार उदास, निराश या बेकार महसूस हुआ?"},
+    {"id": "q3", "domain": "anxiety", "en": "How often have you felt nervous, anxious or on edge?", "hi": "कितनी बार घबराहट, बेचैनी या तनाव महसूस हुआ?"},
+    {"id": "q4", "domain": "anxiety", "en": "How often have you been unable to stop or control worrying?", "hi": "कितनी बार चिंता को रोक नहीं पाए?"},
+    {"id": "q5", "domain": "sleep", "en": "How often have you had trouble sleeping or felt very tired?", "hi": "कितनी बार नींद नहीं आई या बहुत थकान रही?"}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "DRAFT - written by the project author, NOT yet reviewed by a mental health professional. Do not use with real users before clinical review.",
+  "defaults": ["K1", "K3"],
+  "entries": [
+    {"id": "K1", "tags": ["anx", "stress"], "en": {"title": "Slow breathing", "text": "Breathe in for 4 counts, out for 6, for 2 minutes. Try it before a shift or while waiting, when it is safe."}, "hi": {"title": "धीमी साँस", "text": "4 गिनती में साँस लें, 6 में छोड़ें, 2 मिनट तक। शिफ्ट से पहले या इंतज़ार में, जब सुरक्षित हो।"}},
+    {"id": "K2", "tags": ["sleep"], "en": {"title": "Fixed sleep time", "text": "Sleep and wake at similar times, keep the phone away for 30 minutes before bed, and nap only before 4 pm."}, "hi": {"title": "सोने का तय समय", "text": "लगभग रोज़ एक ही समय सोएँ-उठें, सोने से 30 मिनट पहले फ़ोन दूर रखें, झपकी 4 बजे से पहले लें।"}},
+    {"id": "K3", "tags": ["mood", "lonely", "family"], "en": {"title": "Tell one person", "text": "Choose one person you trust and tell them one honest thing about how you feel this week."}, "hi": {"title": "एक इंसान से कहें", "text": "किसी भरोसेमंद व्यक्ति को चुनें और इस हफ्ते आप कैसा महसूस कर रहे हैं, एक सच्ची बात बताएँ।"}},
+    {"id": "K4", "tags": ["mood"], "en": {"title": "One small joy", "text": "Spend 10 minutes on something you used to enjoy: a walk, a song, tea with a friend."}, "hi": {"title": "एक छोटी खुशी", "text": "10 मिनट कोई पसंदीदा काम करें: टहलना, गाना, दोस्त के साथ चाय।"}},
+    {"id": "K5", "tags": ["money"], "en": {"title": "Money worries", "text": "Write your three biggest money worries and one small step for each. Ask your NGO or union about support schemes."}, "hi": {"title": "पैसों की चिंता", "text": "अपनी तीन सबसे बड़ी चिंताएँ लिखें और हर एक के लिए एक छोटा कदम। अपने NGO या यूनियन से सहायता योजनाओं के बारे में पूछें।"}},
+    {"id": "K6", "tags": ["work", "sleep"], "en": {"title": "Short breaks", "text": "Take a 5-minute break every few hours: water, a stretch, some shade."}, "hi": {"title": "छोटे ब्रेक", "text": "हर कुछ घंटों में 5 मिनट का ब्रेक लें: पानी, थोड़ा स्ट्रेच, छाँव।"}},
+    {"id": "K7", "tags": ["family", "lonely"], "en": {"title": "A regular call home", "text": "Fix a time to call someone at home each week. A short, regular call can lighten the load."}, "hi": {"title": "घर पर नियमित फ़ोन", "text": "हर हफ्ते घर पर किसी से बात करने का एक समय तय करें। छोटी, नियमित बातचीत बोझ हल्का करती है।"}},
+    {"id": "K8", "tags": ["anx", "stress"], "en": {"title": "Look around you", "text": "When worry spikes, name 5 things you can see, 4 you can touch and 3 you can hear. It brings attention back to now."}, "hi": {"title": "आसपास देखें", "text": "जब चिंता बढ़े, 5 चीज़ें जो दिखती हैं, 4 जिन्हें छू सकते हैं और 3 जो सुनाई देती हैं, उनके नाम लें। इससे ध्यान अभी में लौटता है।"}}
+  ]
+}

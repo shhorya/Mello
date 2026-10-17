@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mello: voice-first wellbeing check-in</title>
+<!-- Served by `python -m mello.server`. Also works standalone (offline demo logic) when opened directly. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF3F7;--surface:#FFFFFF;--ink:#14283A;--muted:#52677A;--line:#CFDAE3;--accent:#E8A33D;--accent-ink:#2B1C00;--green:#2E8B57;--amber:#B87503;--red:#C0392B;--tint:#E2ECF3;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B26;--surface:#172836;--ink:#E8EEF3;--muted:#9FB2C2;--line:#2A4054;--accent:#F0B24F;--accent-ink:#2B1C00;--green:#4CC38A;--amber:#F0B24F;--red:#F0705F;--tint:#1F3447;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1B26;--surface:#172836;--ink:#E8EEF3;--muted:#9FB2C2;--line:#2A4054;--accent:#F0B24F;--accent-ink:#2B1C00;--green:#4CC38A;--amber:#F0B24F;--red:#F0705F;--tint:#1F3447;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"Hind",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.5}
+main{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+header h1{margin:0;font-size:30px;line-height:1.15;font-weight:700}
+header p{margin:4px 0 0;color:var(--muted)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:16px 0}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;color:var(--ink);padding:8px 16px;font:inherit;font-weight:500;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.note{font-size:14px;color:var(--muted)}
+.q{font-size:23px;line-height:1.35;font-weight:500;margin:6px 0 16px}
+.prog{height:6px;background:var(--tint);border-radius:99px;overflow:hidden;margin-bottom:14px}.prog i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.opts{display:grid;gap:10px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:14px 16px;font:inherit;font-size:18px;cursor:pointer;min-height:56px}
+.opt:hover{border-color:var(--ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.voice{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+.orb{width:64px;height:64px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);font-size:28px;cursor:pointer;position:relative}
+.orb.on::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:3px solid var(--accent);animation:rip 1.1s ease-out infinite}
+@keyframes rip{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){.orb.on::after{animation:none}.prog i{transition:none}}
+.ghost{border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;cursor:pointer}
+.primary{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:12px 22px;font:inherit;font-weight:700;font-size:18px;cursor:pointer}
+textarea{width:100%;min-height:96px;border:1.5px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}
+.tier{border-radius:14px;padding:18px 20px;color:#fff;margin-bottom:16px}
+.tier h2{margin:0 0 4px;font-size:24px}.tier p{margin:0;font-size:18px}
+.t-green{background:#1F6F45}.t-amber{background:#8F5A00}.t-red{background:#A42E21}
+.call{display:inline-block;margin-top:12px;background:#fff;color:#14283A;border-radius:999px;padding:10px 20px;font-weight:700;text-decoration:none}
+.tip{border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:12px 0}.tip b{display:block}
+.trace{display:grid;gap:8px;margin:0;padding:0;list-style:none}.trace li{background:var(--tint);border-radius:10px;padding:8px 12px;font-size:15px}.trace strong{display:block;font-size:14px}
+.row{display:grid;grid-template-columns:96px 1fr 34px;gap:10px;align-items:center;margin:8px 0;font-size:15px}.row s{display:block;height:14px;border-radius:99px;background:var(--tint);text-decoration:none}.row s i{display:block;height:100%;border-radius:99px}
+h3{margin:0 0 6px;font-size:19px}[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Mello मनमित्र</h1><p id="tag"></p></header>
+<div class="bar">
+  <div class="seg" role="group" aria-label="Language"><button id="bhi" aria-pressed="true">हिन्दी</button><button id="ben" aria-pressed="false">English</button></div>
+  <div class="seg" role="group" aria-label="View"><button id="vchk" aria-pressed="true"></button><button id="vdash" aria-pressed="false"></button></div>
+</div>
+<p class="note" id="disc"></p>
+
+<section id="check">
+  <div class="card" id="qcard">
+    <div class="prog"><i id="pbar" style="width:0"></i></div>
+    <div class="note" id="qn"></div>
+    <div class="q" id="qt" aria-live="polite"></div>
+    <div class="opts" id="opts"></div>
+    <div class="voice">
+      <button class="orb" id="mic" aria-label="Speak your answer">🎙</button>
+      <button class="ghost" id="speak"></button>
+      <span class="note" id="hear" aria-live="polite"></span>
+    </div>
+  </div>
+  <div class="card" id="fcard" hidden>
+    <div class="q" id="ft"></div>
+    <textarea id="free" aria-labelledby="ft"></textarea>
+    <div class="voice"><button class="orb" id="mic2" aria-label="Speak">🎙</button><button class="primary" id="done"></button></div>
+  </div>
+  <div id="result" hidden></div>
+</section>
+
+<section id="dash" hidden>
+  <div class="card"><h3 id="dh"></h3><p class="note" id="dn"></p><div id="dtier"></div><h3 style="margin-top:18px" id="dh2"></h3><div id="dthm"></div></div>
+</section>
+</main>
+
+<script>
+"use strict";
+var L="hi";
+var UI={
+ hi:{tag:"आपकी भाषा में एक छोटी, दोस्ताना बातचीत",disc:"यह एक स्क्रीनिंग और सहायता टूल है, इलाज या निदान नहीं। यह डेमो है।",chk:"चेक-इन",dash:"पार्टनर डैशबोर्ड",qn:function(i,n){return "सवाल "+i+" / "+n},hear:"सुन रहा हूँ…",nohear:"इस ब्राउज़र में आवाज़ नहीं चलती। जवाब चुनिए।",miss:"समझ नहीं आया। कृपया जवाब चुनिए।",speak:"🔊 सवाल सुनें",ft:"कुछ और कहना है? (वैकल्पिक)",done:"नतीजा देखें",again:"फिर से शुरू करें",
+  g:["सब ठीक चल रहा है","आपका ध्यान रखना अच्छा है। ये छोटे सुझाव मदद कर सकते हैं।"],a:["थोड़ा बोझ दिख रहा है","आप अकेले नहीं हैं। किसी से बात करना मदद करेगा। ये सुझाव आज़माइए।"],r:["अभी किसी इंसान से बात करें","आपकी बात बहुत मायने रखती है। कृपया अभी Tele-MANAS पर कॉल करें। यह मुफ़्त है और 24x7 चलता है।"],call:"📞 14416 पर कॉल करें",why:"आपके स्कोर",tips:"आपके लिए सुझाव (जाँचे हुए ज्ञान-भंडार से)",trace:"एजेंट क्या कर रहे थे",dh:"गुमनाम रुझान (डेमो डेटा)",dn:"असली उपयोग में केवल सहमति के बाद, गुमनाम आँकड़े दिखेंगे। नीचे सैंपल डेटा और आपके चेक-इन शामिल हैं।",dh2:"आम विषय"},
+ en:{tag:"A short, friendly check-in in your own language",disc:"This is a screening and support tool, not a diagnosis or treatment. This is a demo.",chk:"Check-in",dash:"Partner dashboard",qn:function(i,n){return "Question "+i+" of "+n},hear:"Listening…",nohear:"Voice isn’t supported in this browser. Please tap an answer.",miss:"Didn’t catch that. Please tap an answer.",speak:"🔊 Hear question",ft:"Anything else you’d like to share? (optional)",done:"See my result",again:"Start again",
+  g:["You seem to be doing okay","Looking after yourself matters. These small tips may help."],a:["You seem to be carrying a lot","You’re not alone. Talking to someone can help. Try these tips."],r:["Please talk to a person now","What you’re feeling matters. Please call Tele-MANAS now. It’s free and open 24x7."],call:"📞 Call 14416",why:"Your scores",tips:"Tips for you (from a vetted knowledge base)",trace:"What the agents did",dh:"Anonymized trends (demo data)",dn:"In real use, only consented, anonymized aggregates appear here. Below: sample data plus check-ins from this session.",dh2:"Common themes"}
+};
+var OPT={hi:["बिल्कुल नहीं","कुछ दिन","आधे से ज़्यादा दिन","लगभग रोज़"],en:["Not at all","Several days","More than half the days","Nearly every day"]};
+var Q=[
+ {k:"mood",en:"Over the last 2 weeks, how often have you had little interest or joy in doing things?",hi:"पिछले 2 हफ्तों में कितनी बार किसी काम में मन नहीं लगा या खुशी नहीं मिली?"},
+ {k:"mood",en:"How often have you felt down, low or hopeless?",hi:"कितनी बार उदास, निराश या बेकार महसूस हुआ?"},
+ {k:"anx",en:"How often have you felt nervous, anxious or on edge?",hi:"कितनी बार घबराहट, बेचैनी या तनाव महसूस हुआ?"},
+ {k:"anx",en:"How often have you been unable to stop or control worrying?",hi:"कितनी बार चिंता को रोक नहीं पाए?"},
+ {k:"sleep",en:"How often have you had trouble sleeping or felt very tired?",hi:"कितनी बार नींद नहीं आई या बहुत थकान रही?"}
+];
+var KB=[
+ {id:"K1",t:["anx","stress"],en:["Slow breathing","Breathe in for 4 counts, out for 6, for 2 minutes. Try it before a shift or while waiting, when it is safe."],hi:["धीमी साँस","4 गिनती में साँस लें, 6 में छोड़ें, 2 मिनट तक। शिफ्ट से पहले या इंतज़ार में, जब सुरक्षित हो।"]},
+ {id:"K2",t:["sleep"],en:["Fixed sleep time","Sleep and wake at similar times, keep the phone away for 30 minutes before bed, and nap only before 4 pm."],hi:["सोने का तय समय","लगभग रोज़ एक ही समय सोएँ-उठें, सोने से 30 मिनट पहले फ़ोन दूर रखें, झपकी 4 बजे से पहले लें।"]},
+ {id:"K3",t:["mood","lonely","family"],en:["Tell one person","Choose one person you trust and tell them one honest thing about how you feel this week."],hi:["एक इंसान से कहें","किसी भरोसेमंद व्यक्ति को चुनें और इस हफ्ते आप कैसा महसूस कर रहे हैं, एक सच्ची बात बताएँ।"]},
+ {id:"K4",t:["mood"],en:["One small joy","Spend 10 minutes on something you used to enjoy: a walk, a song, tea with a friend."],hi:["एक छोटी खुशी","10 मिनट कोई पसंदीदा काम करें: टहलना, गाना, दोस्त के साथ चाय।"]},
+ {id:"K5",t:["money"],en:["Money worries","Write your three biggest money worries and one small step for each. Ask your NGO or union about support schemes."],hi:["पैसों की चिंता","अपनी तीन सबसे बड़ी चिंताएँ लिखें और हर एक के लिए एक छोटा कदम। अपने NGO या यूनियन से सहायता योजनाओं के बारे में पूछें।"]},
+ {id:"K6",t:["work","sleep"],en:["Short breaks","Take a 5-minute break every few hours: water, a stretch, some shade."],hi:["छोटे ब्रेक","हर कुछ घंटों में 5 मिनट का ब्रेक लें: पानी, थोड़ा स्ट्रेच, छाँव।"]}
+];
+var THEME_RX={sleep:/sleep|tired|neend|नींद|थक/i,money:/money|salary|debt|paisa|पैसे|कर्ज|उधार/i,family:/family|ghar|परिवार|घर/i,work:/work|boss|shift|kaam|काम|मालिक/i,lonely:/alone|lonely|akela|अकेल/i};
+var CRISIS=/suicid|kill myself|end my life|want to die|hurt myself|don.?t want to live|marna chah|jeena nahi|jina nahi|khud ko khatam|आत्महत्या|मरना चाह|जीना नहीं|खुद को खत्म|जान दे/i;
+var THLABEL={hi:{sleep:"नींद/थकान",money:"पैसे",family:"परिवार",work:"काम",lonely:"अकेलापन",mood:"उदास मन",anx:"चिंता"},en:{sleep:"Sleep/fatigue",money:"Money",family:"Family",work:"Work",lonely:"Loneliness",mood:"Low mood",anx:"Worry"}};
+var log={tier:{green:18,amber:9,red:2},theme:{sleep:14,anx:12,money:9,mood:8,work:7,family:5,lonely:4}};
+var i=0,ans=[],$=function(id){return document.getElementById(id)};
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null;
+
+function T(){return UI[L]}
+function render(){
+ var t=T();$("tag").textContent=t.tag;$("disc").textContent=t.disc;$("vchk").textContent=t.chk;$("vdash").textContent=t.dash;
+ document.documentElement.lang=L==="hi"?"hi":"en";$("bhi").setAttribute("aria-pressed",L==="hi");$("ben").setAttribute("aria-pressed",L==="en");
+ $("speak").textContent=t.speak;$("ft").textContent=t.ft;$("done").textContent=t.done;
+ if(!$("qcard").hidden)showQ();
+ renderDash();
+}
+function showQ(){
+ var t=T(),q=Q[i];$("qn").textContent=t.qn(i+1,Q.length);$("qt").textContent=q[L];$("pbar").style.width=(i/Q.length*100)+"%";
+ var o=$("opts");o.innerHTML="";
+ OPT[L].forEach(function(lab,v){var b=document.createElement("button");b.className="opt";b.textContent=lab;b.onclick=function(){answer(v)};o.appendChild(b)});
+ $("hear").textContent=SR?"":t.nohear;
+}
+function answer(v){ans[i]=v;i++;if(i<Q.length){showQ()}else{$("qcard").hidden=true;$("fcard").hidden=false;$("pbar").style.width="100%"}}
+function say(text){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang=L==="hi"?"hi-IN":"en-IN";speechSynthesis.speak(u)}
+function parseSpoken(s){
+ s=s.toLowerCase();
+ if(/every ?day|nearly|daily|always|रोज|हमेशा|लगभग/.test(s))return 3;
+ if(/half|often|many|आधे|अक्सर|ज़्यादा|ज्यादा/.test(s))return 2;
+ if(/several|few|some|कुछ|कभी कभी|कभी-कभी/.test(s))return 1;
+ if(/not at all|never|no\b|नहीं|बिल्कुल/.test(s))return 0;
+ return -1;
+}
+function listen(btn,onText){
+ if(!SR){$("hear").textContent=T().nohear;return}
+ if(rec){try{rec.stop()}catch(e){}}
+ rec=new SR();rec.lang=L==="hi"?"hi-IN":"en-IN";rec.interimResults=false;
+ btn.classList.add("on");$("hear").textContent=T().hear;
+ rec.onresult=function(e){onText(e.results[0][0].transcript)};
+ rec.onerror=function(){$("hear").textContent=T().miss};
+ rec.onend=function(){btn.classList.remove("on")};
+ try{rec.start()}catch(e){btn.classList.remove("on")}
+}
+function evaluate(){
+ var phq=ans[0]+ans[1],gad=ans[2]+ans[3],txt=$("free").value||"";
+ var crisis=CRISIS.test(txt);
+ var tier=crisis?"red":(phq>=3||gad>=3?"amber":"green");
+ var themes=[];
+ if(phq>=2)themes.push("mood");if(gad>=2)themes.push("anx");if(ans[4]>=2)themes.push("sleep");
+ Object.keys(THEME_RX).forEach(function(k){if(THEME_RX[k].test(txt)&&themes.indexOf(k)<0)themes.push(k)});
+ var scored=KB.map(function(k){var s=k.t.filter(function(x){return themes.indexOf(x)>=0}).length;return{k:k,s:s}}).sort(function(a,b){return b.s-a.s});
+ var hits=scored.filter(function(x){return x.s>0}).slice(0,2).map(function(x){return x.k});
+ if(!hits.length)hits=[KB[0],KB[3]];
+ themes.forEach(function(k){log.theme[k]=(log.theme[k]||0)+1});log.tier[tier]=(log.tier[tier]||0)+1;
+ return{phq:phq,gad:gad,crisis:crisis,tier:tier,themes:themes,hits:hits};
+}
+function showResult(ext){
+ var r=ext||evaluate(),t=T(),m=t[r.tier[0]];
+ var h='<div class="tier t-'+r.tier+'"><h2>'+m[0]+'</h2><p>'+m[1]+'</p>';
+ if(r.tier!=="green")h+='<a class="call" href="tel:14416">'+t.call+'</a>';
+ h+='</div><div class="card"><h3>'+t.why+'</h3><p class="note">PHQ-2: '+r.phq+'/6 &nbsp; GAD-2: '+r.gad+'/6</p>';
+ if(r.tier!=="red"||true){h+='<h3 style="margin-top:14px">'+t.tips+'</h3>';
+  r.hits.forEach(function(k){h+='<div class="tip"><b>'+k[L][0]+'</b>'+k[L][1]+' <span class="note">('+k.id+')</span></div>'})}
+ h+='</div><div class="card"><h3>'+t.trace+'</h3><ul class="trace">';
+ var th=r.themes.map(function(k){return THLABEL.en[k]}).join(", ")||"none";
+ (r.trace||[["Check-in Agent",Q.length+" questions asked in "+(L==="hi"?"Hindi":"English")],["Screening Agent","PHQ-2 "+r.phq+"/6, GAD-2 "+r.gad+"/6"],["Safety and Triage Agent",(r.crisis?"Crisis phrase found: rule override to RED":"No crisis phrases. Tier by scores: "+r.tier.toUpperCase())],["Guidance Agent (RAG)","Themes: "+th+". Retrieved "+r.hits.map(function(k){return k.id}).join(", ")],["Referral Agent",r.tier==="green"?"Not needed this week":"Tele-MANAS 14416 offered"],["Insights Agent","Anonymized record added (tier and themes only)"]])
+  .forEach(function(a){h+="<li><strong>"+a[0]+"</strong>"+a[1]+"</li>"});
+ h+='</ul></div><button class="primary" id="again">'+t.again+'</button>';
+ $("fcard").hidden=true;var res=$("result");res.innerHTML=h;res.hidden=false;
+ $("again").onclick=reset;renderDash();window.scrollTo(0,0);
+}
+function reset(){i=0;ans=[];$("free").value="";$("result").hidden=true;$("fcard").hidden=true;$("qcard").hidden=false;showQ()}
+function bars(el,data,colors,labels){
+ var mx=Math.max.apply(null,Object.keys(data).map(function(k){return data[k]}))||1,h="";
+ Object.keys(data).sort(function(a,b){return data[b]-data[a]}).forEach(function(k){
+  h+='<div class="row"><span>'+(labels[k]||k)+'</span><s><i style="width:'+(data[k]/mx*100)+'%;background:'+(colors[k]||"var(--accent)")+'"></i></s><span>'+data[k]+'</span></div>'});
+ el.innerHTML=h;
+}
+function renderDash(){
+ var t=T();$("dh").textContent=t.dh;$("dn").textContent=t.dn;$("dh2").textContent=t.dh2;
+ bars($("dtier"),log.tier,{green:"var(--green)",amber:"var(--amber)",red:"var(--red)"},{green:L==="hi"?"हरा":"Green",amber:L==="hi"?"पीला":"Amber",red:L==="hi"?"लाल":"Red"});
+ bars($("dthm"),log.theme,{},THLABEL[L]);
+}
+function view(v){var c=v==="chk";$("check").hidden=!c;$("dash").hidden=c;$("vchk").setAttribute("aria-pressed",c);$("vdash").setAttribute("aria-pressed",!c)}
+$("bhi").onclick=function(){L="hi";render()};$("ben").onclick=function(){L="en";render()};
+$("vchk").onclick=function(){view("chk")};$("vdash").onclick=function(){view("dash")};
+$("speak").onclick=function(){say(Q[i][L])};
+$("mic").onclick=function(){listen($("mic"),function(s){var v=parseSpoken(s);if(v<0){$("hear").textContent=T().miss}else{$("hear").textContent="“"+s+"”";answer(v)}})};
+$("mic2").onclick=function(){listen($("mic2"),function(s){$("free").value=($("free").value+" "+s).trim()})};
+function fromApi(a){return{phq:a.scores.phq2,gad:a.scores.gad2,crisis:a.reasons.some(function(x){return x.indexOf("rule")===0}),tier:a.tier,themes:a.themes,hits:a.tips.map(function(k){var o={id:k.id};o[L]=[k.title,k.text];return o}),trace:a.trace.map(function(x){return [x.agent,x.detail]})}}
+function loadInsights(){fetch("/api/insights").then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&!d.suppressed){log={tier:d.tier,theme:d.themes};renderDash()}}).catch(function(){})}
+/* Online mode: the Python backend (mello.agents) does the work. Offline mode (file:// or server down): the JS logic above runs instead. */
+$("done").onclick=function(){fetch("/api/checkin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({lang:L,answers:ans,free_text:$("free").value})}).then(function(r){if(!r.ok)throw new Error("api");return r.json()}).then(function(a){showResult(fromApi(a));loadInsights()}).catch(function(){showResult()})};
+loadInsights();
+render();showQ();
+</script>
+</body>
+</html>

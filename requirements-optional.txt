@@ -1,0 +1,2 @@
+# Optional: local speech-to-text (free, open source)
+faster-whisper
