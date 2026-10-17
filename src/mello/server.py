@@ -11,7 +11,7 @@ from .config import FRONTEND_DIR
 from .insights import InsightsStore
 
 MAX_BODY = 20_000
-MIME = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml", ".json": "application/json"}
+MIME = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".svg": "image/svg+xml", ".ico": "image/x-icon", ".json": "application/json", ".woff2": "font/woff2", ".txt": "text/plain; charset=utf-8", ".map": "application/json"}
 
 
 class Handler(BaseHTTPRequestHandler):

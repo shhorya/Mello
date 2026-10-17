@@ -12,3 +12,18 @@ models/*.joblib
 models/metrics.json
 .env
 .DS_Store
+
+# Web frontend (web/)
+web/node_modules/
+web/.next/
+web/out/
+.env*.local
+.vercel/
+
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.design-cache/
+.v0-trash/

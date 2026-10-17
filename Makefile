@@ -1,4 +1,4 @@
-.PHONY: install train test run cli demo-data
+.PHONY: install train test run cli demo-data web-install web-dev web-build
 install:
 	pip install -r requirements.txt
 train:
@@ -11,3 +11,9 @@ cli:
 	PYTHONPATH=src python -m mello.cli --lang en
 demo-data:
 	PYTHONPATH=src python scripts/seed_demo_data.py
+web-install:
+	cd web && pnpm install
+web-dev:
+	cd web && pnpm dev
+web-build:
+	cd web && pnpm build

@@ -5,7 +5,8 @@ from pathlib import Path
 ROOT = Path(os.environ.get("MANNMITRA_HOME", Path(__file__).resolve().parents[2]))
 DATA_DIR = ROOT / "data"
 MODEL_DIR = ROOT / "models"
-FRONTEND_DIR = ROOT / "frontend"
+_WEB_OUT = ROOT / "web" / "out"
+FRONTEND_DIR = _WEB_OUT if (_WEB_OUT / "index.html").is_file() else ROOT / "frontend"
 DB_PATH = DATA_DIR / "insights.db"
 MODEL_PATH = MODEL_DIR / "risk_classifier.joblib"
 
